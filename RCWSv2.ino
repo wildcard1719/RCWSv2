@@ -101,9 +101,7 @@ void read_distance(){
     if (Serial.read() == '\n'){
       distance_ = Serial.parseFloat();
       distance = distance_ * 10;
-      if(distance > 120){
-        distance = 130;
-      }
+      constrain(distance, 0, 130);
       angle = map(distance, 0, 120, 0, 8);
     }
   }
@@ -204,9 +202,8 @@ void loop() {
   }
   YY = float(YY / 5.0);
   
-  if ((YYY + YY) <= 145 && (YYY + YY) >= 70){
-    YYY = float(YYY + float(YY));
-  }
+  YYY = float(YYY + float(YY));
+  YYY = constrain(YYY, 70, 145);
   
   if (X == 0){
     XXX = 90;
